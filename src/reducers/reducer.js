@@ -12,19 +12,10 @@ const reducer = (state = initialState, action ) => {
             return {...state, error:action.error}
         case "LOADING":
             return {...state, loading:action.loading}
-        // case "SET_FAVORITS":
-        //     let airlineList = state.airlineList;
-        //     let item = airlineList.find((item)=> item.id === action.id)
-
-        //     // if(airlineList[action.id]){
-        //     //     airlineList[action.id].favorite = !airlineList[action.id].favorite;
-        //     // }
-        //     // console.log(airlineList)
-            
-        //     return {...state, airlineList:airlineList, loading:action.loading}
+        case "SET_FAVORITS":
+            return {...state, favorites:[...state.favorites, action.id]}
         default:
             return state;
-
     }
 }
 

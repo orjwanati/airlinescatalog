@@ -6,9 +6,7 @@ import no_image from './images/no_image.png';
 
 
 function AirlineDetails({info, goBack}) {
-    // return (
-    //     <p>{info.name}</p>
-    // )
+ 
     return(
         <div>
         <Button className={"mx-0 my-0 text-black sticky-top btn btn-light" } 
@@ -19,23 +17,20 @@ function AirlineDetails({info, goBack}) {
         </Button> 
 
         <Card className="mx-2 my-2 border border-1 border-dark " style={{ width: '90%', height: '90%' }}>
-        <Card.Img variant="top" src={info.logo} 
-         onError={({ currentTarget }) => {
-            currentTarget.onerror = null; // prevents looping
-            currentTarget.src=no_image;
-            }} 
-        
-        />
-        <Card.Body>
-            <Card.Title>{info.name}</Card.Title>
-            <Card.Title>{info.country}</Card.Title>
-            <Card.Title>{info.head_quaters}</Card.Title>
-            <Card.Title>{info.slogan}</Card.Title>
-            <Card.Title>{info.website}</Card.Title>
-            <Card.Title>{info.established}</Card.Title>
-            {/* <Card.Text>
-            </Card.Text> */}
-        </Card.Body>
+            <Card.Img variant="top" src={info.logo} 
+            onError={({ currentTarget }) => {
+                currentTarget.onerror = null; // prevents looping
+                currentTarget.src=no_image;
+                }} 
+            />
+            <Card.Body>
+                <Card.Title>Airline Name: {info.name}</Card.Title>
+                <Card.Text><b>Country:</b> {info.country}</Card.Text>
+                <Card.Text><b>Head Quarters:</b> {info.head_quaters}</Card.Text>
+                <Card.Text><b>Established on: </b> {info.established}</Card.Text>
+                <Card.Text><b>Slogan: </b>{info.slogan}</Card.Text>
+                <Card.Link target="_blank"  href={'http://' + info.website}>{"Check Website"}</Card.Link>
+            </Card.Body>
         </Card>
         </div>
         )
