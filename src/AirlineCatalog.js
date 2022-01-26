@@ -6,12 +6,13 @@ import LoadingPage from "./LoadingPage";
 import { FixedSizeGrid as Grid } from 'react-window';
 import AirlineDetails from "./AirlineDetails";
 import Button from "@restart/ui/esm/Button";
+import AutoSizer from "react-virtualized-auto-sizer";
 
 import * as Icon from 'react-bootstrap-icons';
 
 function AirlineCatalog({airlineList, loading, error, fetchAirlines, setFavorite}) {
     const [currentView, setCurrentView] = useState({page:"list", index:0}) // or detail
-    let columnCount = 5;
+    let columnCount = 4;
     const gridRef = useRef();
 
     useLayoutEffect(() => { 
@@ -53,21 +54,24 @@ function AirlineCatalog({airlineList, loading, error, fetchAirlines, setFavorite
             return(<AirlineDetails info={airlineList[currentView.index]} goBack={goBackHere}/>)
         } else {
         return(
-            <div>
-                <Grid
+            <div style={{width:"100%", height:"100vh"}}>
+                  <AutoSizer>
+                  {({height, width}) => (<Grid
                     columnCount={columnCount}
                     columnWidth={300}
-                    height={2000}
+                    height={height}
                     rowCount={(airlineList.length/columnCount)+1}
                     rowHeight={300}
                     ref={gridRef}
-                    width={300*columnCount}>
+                    width={width}>
                     {Cell}
-                </Grid>
+                </Grid>)}
+                </AutoSizer>
+
                 <Button  onClick={scrollToTop}
-                    style={{backgroundColor:'red'}}
-                    className="position-sticky position-absolute bottom-0 start-100">
-                    <Icon.ArrowUpCircle className="p-1" size={25}/>
+                    style={{backgroundColor:'#0c9c9c', height:"50"}}
+                    className="mx-10 fixedBottomRight border border-0 rounded-pill">
+                    <Icon.ArrowUpCircle className="p-1" size={28}/>
                      Go Top
                 </Button>
 

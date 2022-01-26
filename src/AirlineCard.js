@@ -17,7 +17,7 @@ function AirlineCard({style , info, setFavorite, onClick}) {
                     }} >
                     {!isFavorite?<Icon.PlusSquare color="#FFFFF" size={25}/>:<Icon.HeartFill  color="#FF0000" size={22}/>} 
                 </Button> 
-                <Card.Img className=".card-img-top" variant="top" src={info.logo} 
+                <Card.Img className="card-img-top" variant="top" src={info.logo} 
                     onError={({ currentTarget }) => {
                         currentTarget.onerror = null; // prevents looping
                         currentTarget.src=no_image;

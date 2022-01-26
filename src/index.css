@@ -23,3 +23,9 @@ code {
   width: 42 rem;
   /* height: 5vh; */
 }
+
+.fixedBottomRight {
+  position: absolute;
+  right:10px;
+  bottom:8px;
+}

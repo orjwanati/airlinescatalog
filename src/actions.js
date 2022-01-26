@@ -2,6 +2,9 @@ import data from "./test/data"
 
 export const fetchAirlines = () => {
     return (dispatch) => {
+        return dispatch(
+            {type: "FETCH", airlineList: data, loading:false}
+        )
         dispatch({type: "LOADING", loading: true})
         return fetch('https://api.instantwebtools.net/v1/airlines')
                .then(response => response.json())
