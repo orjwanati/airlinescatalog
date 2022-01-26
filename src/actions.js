@@ -1,18 +1,15 @@
-import data from "./test/data"
+import { ActionCode } from "./reducers/constants"
 
 export const fetchAirlines = () => {
     return (dispatch) => {
-        return dispatch(
-            {type: "FETCH", airlineList: [...data, ...data, ...data], loading:false}
-        )
-        dispatch({type: "LOADING", loading: true})
+        dispatch({type: ActionCode.LOADING, loading: true})
         return fetch('https://api.instantwebtools.net/v1/airlines')
                .then(response => response.json())
                .then(json => dispatch(
-                   {type: "FETCH", airlineList: json, loading:false}
+                   {type: ActionCode.FETCH, airlineList: json, loading:false}
                ))
                .catch(err => dispatch(
-                    {type: "ERROR", msg: "Unable to fetch data"}
+                    {type: ActionCode.ERROR, msg: "Unable to fetch data"}
                ) ) 
     }
 }
@@ -20,6 +17,6 @@ export const fetchAirlines = () => {
 
 export const setFavorite = (id) => {
     return (dispatch) => {
-        dispatch({type: "SET_FAVORITS", id: id})
+        dispatch({type: ActionCode.SET_FAVORITES, id: id})
     }
 }

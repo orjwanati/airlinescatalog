@@ -6,7 +6,6 @@ import no_image from './images/no_image.png';
 
 
 function AirlineDetails({info, goBack}) {
- 
     return(
         <div>
         <Button className={"mx-0 my-0 text-black sticky-top btn btn-light" } 
