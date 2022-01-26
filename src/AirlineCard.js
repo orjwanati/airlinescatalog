@@ -5,11 +5,16 @@ import * as Icon from 'react-bootstrap-icons';
 import { setFavorite } from "./actions";
 import no_image from './images/no_image.png';
 
-function AirlineCard({style , info, setFavorite, onClick}) {
+function AirlineCard({style , info, widthPercentage, setFavorite, onClick}) {
     const [isFavorite, toggleFavorite] = useState(false)
+    console.log({widthPercentage})
+
     return(
-        <div  style={style} >
-            <Card tag="a" onClick={onClick} className="mx-2 px-2 my-2 border border-1 border-dark " style={{ width: '90%', height: '90%', cursor: "pointer" }}>
+
+            <Card tag="a" onClick={onClick} 
+            className="mx-2 px-2 my-2 border border-1 border-dark " 
+            style={{ width: widthPercentage+'%', height: '90%', cursor: "pointer" }}
+            >
                 <Button className={"position-absolute btn btn-light" } 
                     onClick={(event)=>{
                         event.stopPropagation();
@@ -31,7 +36,6 @@ function AirlineCard({style , info, setFavorite, onClick}) {
                     <a target="_blank"  href={'http://' + info.website}>{"Check Website"}</a>
                 </Card.Text>
             </Card>
-        </div>
     )
 }
 
