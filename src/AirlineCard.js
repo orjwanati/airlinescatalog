@@ -7,7 +7,7 @@ import no_image from './images/no_image.png';
 function AirlineCard({style , index, info, widthPercentage, setFavorite, onClick}) {
     const [isFavorite, toggleFavorite] = useState(false)
 
-    const uniqueId = ()=> Date.now().toString(36) + Math.random().toString(36).substring(2);
+    // const uniqueId = ()=> Date.now().toString(36) + Math.random().toString(36).substring(2);
 
     return(
             <Card 
@@ -15,6 +15,7 @@ function AirlineCard({style , index, info, widthPercentage, setFavorite, onClick
             tag="a" onClick={onClick} 
                 className="mx-2 px-2 my-2 border border-1 border-dark " 
                 style={{ width: widthPercentage+'%', height: '90%', cursor: "pointer" }}>
+                {/* style={{ width: 300, height: 300, cursor: "pointer" }}> */}
                 
                 <Button className={"position-absolute btn btn-light"} onClick={(event)=>{
                         event.stopPropagation();

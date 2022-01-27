@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { fetchAirlines, setFavorite } from "./actions";
 import AirlineCard from "./AirlineCard";
 import LoadingPage from "./LoadingPage";
-import { FixedSizeList as List } from 'react-window';
+import { FixedSizeGrid as Grid } from 'react-window';
 import AirlineDetails from "./AirlineDetails";
 import Button from "@restart/ui/esm/Button";
 import AutoSizer from "react-virtualized-auto-sizer";
@@ -11,10 +11,11 @@ import AutoSizer from "react-virtualized-auto-sizer";
 import * as Icon from 'react-bootstrap-icons';
 import ErrorPage from "./ErrorPage";
 
-function AirlineCatalog({airlineList, loading, error, fetchAirlines, setFavorite}) {
+function AirlineGrid({airlineList, loading, error, fetchAirlines, setFavorite}) {
     const [currentView, setCurrentView] = useState({page:"list", index:0}) // or detail
     const gridRef = useRef();
     const itemSize = 300
+    let itemsPerRow = 1;
 
     useLayoutEffect(() => { 
         console.log("fetching ...")
@@ -63,9 +64,19 @@ function AirlineCatalog({airlineList, loading, error, fetchAirlines, setFavorite
 
         return (
             <div key={index} style={style} className="d-flex flex-row ">
-                {airlines.map((item, idx) => <AirlineCard key={idx} index={idx} style={style} widthPercentage={100/itemsPerRow} info={item} onClick={()=>goToAirlineDetailsPage(startColIndex+idx)}/>)}
+                {airlines.map((item, idx) => <AirlineCard index={idx} style={style} widthPercentage={100/itemsPerRow} info={item} onClick={()=>goToAirlineDetailsPage(startColIndex+idx)}/>)}
             </div>
         )
+    }
+    const getIndex = (columnIndex, rowIndex) => (rowIndex*itemsPerRow + columnIndex)
+
+    const Cell = ({ columnIndex, rowIndex, style }) => {
+        let listIndex = getIndex(columnIndex, rowIndex)
+        if(listIndex < airlineList.length) {
+            return <AirlineCard style={style} info={airlineList[listIndex]} onClick={()=>goToAirlineDetailsPage(listIndex)}/>
+        } else {
+            return <p></p>
+        }
     }
 
 
@@ -81,27 +92,24 @@ function AirlineCatalog({airlineList, loading, error, fetchAirlines, setFavorite
                 <div style={{width:"100%", height:"100vh"}}>
                   <AutoSizer>
                         {({height, width}) => {
-                            let itemsPerRow = Math.floor(width / itemSize);
+                            itemsPerRow = Math.floor(width / itemSize);
                             if(itemsPerRow === 0 ) {
                                 itemsPerRow = 1
                             }
                             
                             let rowCount = Math.ceil(airlineList.length / itemsPerRow);
-                            
+                            console.log("itemsPerRow", itemsPerRow, "rowCount", rowCount)
                             return (
-                                <List
-                                    itemCount={rowCount}
-                                    layout="vertical"
-                                    height={height}
-                                    itemSize={itemSize}
-                                    overscanCount={10}
-                                    ref={gridRef}
-                                    width={width}
-                                    // itemKey={(index, data) => itemKey(index, data, itemsPerRow)}
-                                    >
-                                    {(x)=>ListCell(x, itemsPerRow)}
-
-                                </List>)}}
+                                <Grid
+                                columnCount={itemsPerRow}
+                                columnWidth={300}
+                                height={height}
+                                rowCount={rowCount}
+                                rowHeight={300}
+                                ref={gridRef}
+                                width={width}>
+                                {Cell}
+                            </Grid>)}}
                     </AutoSizer>
                     <Button  onClick={scrollToTop}
                         style={{backgroundColor:'#0c9c9c', height:"50"}}
@@ -128,4 +136,4 @@ const mapStatetoProps = (state) => {
     }
   }
   
-  export default connect(mapStatetoProps, mapDispatchtoProps)(AirlineCatalog); 
+  export default connect(mapStatetoProps, mapDispatchtoProps)(AirlineGrid); 
