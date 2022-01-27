@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import { fetchAirlines, setFavorite } from "./actions";
 import AirlineCard from "./AirlineCard";
@@ -16,7 +16,7 @@ function AirlineCatalog({airlineList, loading, error, fetchAirlines, setFavorite
     const gridRef = useRef();
     const itemSize = 300
 
-    useLayoutEffect(() => { 
+    useEffect(() => { 
         console.log("fetching ...")
         fetchAirlines()
     }, [])
@@ -24,7 +24,6 @@ function AirlineCatalog({airlineList, loading, error, fetchAirlines, setFavorite
     const scrollToTop = () =>{
         gridRef.current.scrollTo({ scrollLeft: 0, scrollTop: 0 })
     };
-    
 
 
     const goToAirlineDetailsPage = (index) => {
