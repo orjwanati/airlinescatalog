@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Card , Button} from "react-bootstrap";
 import * as Icon from 'react-bootstrap-icons';
-import no_image from './images/no_image.png';
+import no_image from '../images/no_image.png';
 
 function AirlineCard({style , index, info, widthPercentage, setFavorite, onClick}) {
     const [isFavorite, toggleFavorite] = useState(false)

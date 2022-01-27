@@ -1,8 +1,6 @@
-import { useEffect } from "react";
 import { Card , Button} from "react-bootstrap";
-import data from "./test/data";
 import * as Icon from 'react-bootstrap-icons';
-import no_image from './images/no_image.png';
+import no_image from '../images/no_image.png';
 
 
 function AirlineDetails({info, goBack}) {

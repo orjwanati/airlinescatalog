@@ -1,6 +1,6 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
-import { fetchAirlines, setFavorite } from "./actions";
+import { fetchAirlines, setFavorite } from "../actions/actions";
 import AirlineCard from "./AirlineCard";
 import LoadingPage from "./LoadingPage";
 import { FixedSizeList as List } from 'react-window';

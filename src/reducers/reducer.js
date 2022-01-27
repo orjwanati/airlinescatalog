@@ -1,4 +1,4 @@
-import { ActionCode } from "./constants"
+import { ActionCode } from "../actions/constants"
 
 const initialState = {
     airlineList:[],

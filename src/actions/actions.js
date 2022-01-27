@@ -1,4 +1,4 @@
-import { ActionCode } from "./reducers/constants"
+import { ActionCode } from "./constants"
 
 export const fetchAirlines = (url) => {
     return (dispatch) => {
