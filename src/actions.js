@@ -1,15 +1,15 @@
 import { ActionCode } from "./reducers/constants"
 
-export const fetchAirlines = () => {
+export const fetchAirlines = (url) => {
     return (dispatch) => {
         dispatch({type: ActionCode.LOADING, loading: true})
-        return fetch('https://api.instantwebtools.net/v1/airlines')
+        return fetch(url)
                .then(response => response.json())
                .then(json => dispatch(
                    {type: ActionCode.FETCH, airlineList: json, loading:false}
                ))
                .catch(err => dispatch(
-                    {type: ActionCode.ERROR, msg: "Unable to fetch data"}
+                    {type: ActionCode.ERROR, error:{msg: "Unable to fetch data"}}
                ) ) 
     }
 }

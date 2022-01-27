@@ -83,7 +83,7 @@ function AirlineGrid({airlineList, loading, error, fetchAirlines, setFavorite}) 
     if(loading) {
         return <LoadingPage/>
     } else if(error) {
-        return <ErrorPage/>
+        return <ErrorPage msg={error.msg}/>
     } else {
         if(currentView.page === "detail") {
             return(<AirlineDetails info={airlineList[currentView.index]} goBack={goBackHere}/>)

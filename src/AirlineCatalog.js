@@ -18,7 +18,7 @@ function AirlineCatalog({airlineList, loading, error, fetchAirlines, setFavorite
 
     useEffect(() => { 
         console.log("fetching ...")
-        fetchAirlines()
+        fetchAirlines('https://api.instantwebtools.net/v1/airlines')
     }, [])
 
     const scrollToTop = () =>{
@@ -36,24 +36,6 @@ function AirlineCatalog({airlineList, loading, error, fetchAirlines, setFavorite
         setCurrentView({page:"main", index:0})
     }
 
-
-    const itemKey = (index, data, itemsPerRow) => {
- 
-        // let startColIndex = (index*itemsPerRow)
-        // let endColIndex = startColIndex + itemsPerRow
-        // endColIndex = endColIndex<=airlineList.length?endColIndex:airlineList.length;
-        // let airlines = airlineList.slice(startColIndex, endColIndex);
-        let key = "" + index + "##" +  itemsPerRow
-        // airlines.map((item) => {
-        //     key = key + item.id
-        // }
-        // )
-        console.log("key => ", key)
-        // return uniqueId()
-        return key.toString()
-    }
-    const uniqueId = ()=> Date.now().toString(36) + Math.random().toString(36).substring(2);
-
     const ListCell = ({ index, style }, itemsPerRow) => {
         let startColIndex = (index*itemsPerRow)
         let endColIndex = startColIndex + itemsPerRow
@@ -67,11 +49,11 @@ function AirlineCatalog({airlineList, loading, error, fetchAirlines, setFavorite
         )
     }
 
-
+    console.log(loading, error)
     if(loading) {
         return <LoadingPage/>
     } else if(error) {
-        return <ErrorPage/>
+        return <ErrorPage msg={error.msg}/>
     } else {
         if(currentView.page === "detail") {
             return(<AirlineDetails info={airlineList[currentView.index]} goBack={goBackHere}/>)
@@ -96,7 +78,6 @@ function AirlineCatalog({airlineList, loading, error, fetchAirlines, setFavorite
                                     overscanCount={10}
                                     ref={gridRef}
                                     width={width}
-                                    // itemKey={(index, data) => itemKey(index, data, itemsPerRow)}
                                     >
                                     {(x)=>ListCell(x, itemsPerRow)}
 
@@ -122,7 +103,7 @@ const mapStatetoProps = (state) => {
   
   const mapDispatchtoProps = (dispatch) => {
     return {
-        fetchAirlines: () => dispatch(fetchAirlines()),
+        fetchAirlines: (url) => dispatch(fetchAirlines(url)),
         // setFavorite: (id) => dispatch(setFavorite(id)),
     }
   }
