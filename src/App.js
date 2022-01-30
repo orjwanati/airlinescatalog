@@ -1,10 +1,10 @@
 import './App.css';
-import AirlineCatalog from './components/AirlineCatalog';
 import React from 'react';
+import AirlineCatalogContainer from './components/AirlineCatalogContainer';
 
 function App() {
   return (
-    <AirlineCatalog/>
+    <AirlineCatalogContainer/>
   );
 }
 

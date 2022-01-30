@@ -1,27 +1,24 @@
 
 import { useState } from "react";
 import { Card , Button} from "react-bootstrap";
-import * as Icon from 'react-bootstrap-icons';
+import { HeartFill, PlusSquare } from "react-bootstrap-icons";
+// import * as Icon from 'react-bootstrap-icons';
 import no_image from '../images/no_image.png';
 
 function AirlineCard({style , index, info, widthPercentage, setFavorite, onClick}) {
     const [isFavorite, toggleFavorite] = useState(false)
 
-    // const uniqueId = ()=> Date.now().toString(36) + Math.random().toString(36).substring(2);
 
     return(
             <Card 
-            // key={uniqueId()}  
             tag="a" onClick={onClick} 
                 className="mx-2 px-2 my-2 border border-1 border-dark " 
                 style={{ width: widthPercentage+'%', height: '90%', cursor: "pointer" }}>
-                {/* style={{ width: 300, height: 300, cursor: "pointer" }}> */}
-                
                 <Button className={"position-absolute btn btn-light"} onClick={(event)=>{
                         event.stopPropagation();
                         toggleFavorite(!isFavorite)}} >
 
-                    {!isFavorite?<Icon.PlusSquare color="#FFFFF" size={25}/>:<Icon.HeartFill  color="#FF0000" size={22}/>} 
+                    {!isFavorite?<PlusSquare color="#FFFFF" size={25}/>:<HeartFill  color="#FF0000" size={22}/>} 
                 </Button>
 
                 <Card.Img className="card-img-top" variant="top" src={info.logo} 

@@ -8,12 +8,12 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action ) => {
-    console.log("Received an action to Reducer", action)
+    // console.log("Received an action to Reducer", action)
     switch(action.type) {
         case ActionCode.FETCH:
             return {...state, airlineList: action.airlineList, error:null, loading:action.loading}
         case ActionCode.ERROR:
-            return {...state, error:action.error, loading:false}
+            return {...state, error:action.error, airlineList:[], loading:false}
         case ActionCode.LOADING:
             return {...state, error:null, loading:action.loading}
         case ActionCode.SET_FAVORITES:

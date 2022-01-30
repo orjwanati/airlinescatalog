@@ -5,21 +5,18 @@ import AirlineCard from "./AirlineCard";
 import LoadingPage from "./LoadingPage";
 import { FixedSizeList as List } from 'react-window';
 import AirlineDetails from "./AirlineDetails";
-import Button from "@restart/ui/esm/Button";
 import AutoSizer from "react-virtualized-auto-sizer";
 
 import * as Icon from 'react-bootstrap-icons';
 import ErrorPage from "./ErrorPage";
+import { Button } from "react-bootstrap";
 
-function AirlineCatalog({airlineList, loading, error, fetchAirlines, setFavorite}) {
+function AirlineCatalog({airlineList, loading, error}) {
     const [currentView, setCurrentView] = useState({page:"list", index:0}) // or detail
     const gridRef = useRef();
     const itemSize = 300
 
-    useEffect(() => { 
-        console.log("fetching ...")
-        fetchAirlines('https://api.instantwebtools.net/v1/airlines')
-    }, [])
+    
 
     const scrollToTop = () =>{
         gridRef.current.scrollTo({ scrollLeft: 0, scrollTop: 0 })
@@ -95,17 +92,4 @@ function AirlineCatalog({airlineList, loading, error, fetchAirlines, setFavorite
     }
 }
 
-const mapStatetoProps = (state) => {
-    return { airlineList: state.airlineList,
-            loading: state.loading,
-            error: state.error }
-  }
-  
-  const mapDispatchtoProps = (dispatch) => {
-    return {
-        fetchAirlines: (url) => dispatch(fetchAirlines(url)),
-        // setFavorite: (id) => dispatch(setFavorite(id)),
-    }
-  }
-  
-  export default connect(mapStatetoProps, mapDispatchtoProps)(AirlineCatalog); 
+export default AirlineCatalog;
